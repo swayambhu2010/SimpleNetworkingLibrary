@@ -27,6 +27,12 @@ public protocol APIEndPoint {
     
 }
 
+public extension APIEndPoint {
+    var schema: String {
+        return "https"
+    }
+}
+
 public protocol BaseRequest {
     func createRequest(request: APIEndPoint) -> URLRequest?
 }
@@ -36,7 +42,7 @@ public class RequestBuilder: BaseRequest {
     
     public func createRequest(request: APIEndPoint) -> URLRequest? {
         var component = URLComponents()
-        component.scheme = "https"
+        component.scheme = request.schema
         component.host = request.baseURL
         component.path = request.path
         component.queryItems = request.queryParams
