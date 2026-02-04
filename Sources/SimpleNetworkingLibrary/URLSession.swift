@@ -7,12 +7,13 @@
 
 import Foundation
 
-protocol SessionManager {
+public protocol SessionManager {
     func execute(url: URLRequest) async throws -> (Data, URLResponse)
 }
 
-class RequestSession: SessionManager {
-    func execute(url: URLRequest) async throws -> (Data, URLResponse) {
-         try await URLSession.shared.data(for: url)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public class RequestSession: SessionManager {
+    public func execute(url: URLRequest) async throws -> (Data, URLResponse) {
+        try await URLSession.shared.data(for: url)
     }
 }

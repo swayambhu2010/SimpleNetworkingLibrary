@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol ResponseDecoder {
+public protocol ResponseDecoder {
     func decodeResponse<T: Decodable>(type: T.Type, data: Data) throws -> T?
 }
 
-class ResponseObject: ResponseDecoder {
-    func decodeResponse<T>(type: T.Type, data: Data) throws -> T? where T : Decodable {
+public class ResponseObject: ResponseDecoder {
+    public func decodeResponse<T>(type: T.Type, data: Data) throws -> T? where T : Decodable {
         let decoder = JSONDecoder()
         let data = try decoder.decode(type, from: data)
         return data

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case patch = "PATCH"
@@ -15,7 +15,7 @@ enum HTTPMethod: String {
 }
 
 
-protocol APIEndPoint {
+public protocol APIEndPoint {
     var schema: String { get }
     var baseURL: String { get }
     var path: String { get }
@@ -27,12 +27,12 @@ protocol APIEndPoint {
     
 }
 
-protocol BaseRequest {
+public protocol BaseRequest {
     func createRequest(request: APIEndPoint) -> URLRequest?
 }
 
-class RequestBuilder: BaseRequest {
-    func createRequest(request: APIEndPoint) -> URLRequest? {
+public class RequestBuilder: BaseRequest {
+    public func createRequest(request: APIEndPoint) -> URLRequest? {
         var component = URLComponents()
         component.scheme = "https"
         component.host = request.baseURL
