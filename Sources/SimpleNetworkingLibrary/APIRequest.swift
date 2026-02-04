@@ -32,6 +32,8 @@ public protocol BaseRequest {
 }
 
 public class RequestBuilder: BaseRequest {
+    public init() {}
+    
     public func createRequest(request: APIEndPoint) -> URLRequest? {
         var component = URLComponents()
         component.scheme = "https"

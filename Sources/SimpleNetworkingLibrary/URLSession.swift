@@ -13,6 +13,8 @@ public protocol SessionManager {
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public class RequestSession: SessionManager {
+    public init() {}
+    
     public func execute(url: URLRequest) async throws -> (Data, URLResponse) {
         try await URLSession.shared.data(for: url)
     }

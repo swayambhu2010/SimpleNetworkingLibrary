@@ -12,6 +12,8 @@ public protocol ResponseDecoder {
 }
 
 public class ResponseObject: ResponseDecoder {
+    public init() {}
+    
     public func decodeResponse<T>(type: T.Type, data: Data) throws -> T? where T : Decodable {
         let decoder = JSONDecoder()
         let data = try decoder.decode(type, from: data)
