@@ -13,11 +13,11 @@ public protocol NetworkRequest {
 
 public class NetworkService: NetworkRequest {
     
-    private var requestBuilder: RequestBuilder
-    private var sessionManager: RequestSession
-    private var decoder: ResponseObject
+    private var requestBuilder: BaseRequest
+    private var sessionManager: SessionManager
+    private var decoder: ResponseDecoder
     
-    public init(requestBuilder: RequestBuilder, sessionManager: RequestSession, decoder: ResponseObject) {
+    public init(requestBuilder: BaseRequest, sessionManager: SessionManager, decoder: ResponseDecoder) {
         self.requestBuilder = requestBuilder
         self.sessionManager = sessionManager
         self.decoder = decoder
