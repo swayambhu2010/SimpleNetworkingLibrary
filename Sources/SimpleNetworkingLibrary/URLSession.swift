@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 public protocol SessionManager {
     func execute(url: URLRequest) async throws -> (Data, URLResponse)
@@ -17,5 +18,32 @@ public class RequestSession: SessionManager {
     
     public func execute(url: URLRequest) async throws -> (Data, URLResponse) {
         try await URLSession.shared.data(for: url)
+    }
+}
+
+class AlamofireHTTPClient: SessionManager {
+    
+    let session: Session
+    
+    init(session: Session = .default) {
+        self.session = session
+    }
+    
+    func execute(url: URLRequest) async throws -> (Data, URLResponse) {
+        let afResponse = await session
+            .request(url)
+            .serializingData(emptyResponseCodes: [200, 204, 205])
+            .response                                           // AFDataResponse<Data>
+        
+        // Step 2: If Alamofire produced an error, throw it
+        if let error = afResponse.error {
+            throw error
+        }
+        
+        if let data = afResponse.data, let resp = afResponse.response {
+            // Step 3: Return (Data?, URLResponse?) to match the protocol
+            return (data, resp)
+        }
+        return (Data(), URLResponse())
     }
 }

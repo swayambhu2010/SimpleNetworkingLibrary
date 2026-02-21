@@ -18,12 +18,18 @@ let package = Package(
             targets: ["SimpleNetworkingLibrary"]
         ),
     ],
+    dependencies: [
+        // 1. Added Alomfire Dependency
+        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.11.1"))
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SimpleNetworkingLibrary"
+            name: "SimpleNetworkingLibrary",
+            dependencies: [
+                .product(name: "Alamofire", package: "Alamofire")
+                ]
         ),
-        
     ]
 )
