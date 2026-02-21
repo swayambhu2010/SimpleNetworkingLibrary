@@ -21,15 +21,15 @@ public class RequestSession: SessionManager {
     }
 }
 
-class AlamofireHTTPClient: SessionManager {
+public class AlamofireHTTPClient: SessionManager {
     
     let session: Session
     
-    init(session: Session = .default) {
+    public init(session: Session = .default) {
         self.session = session
     }
     
-    func execute(url: URLRequest) async throws -> (Data, URLResponse) {
+    public func execute(url: URLRequest) async throws -> (Data, URLResponse) {
         let afResponse = await session
             .request(url)
             .serializingData(emptyResponseCodes: [200, 204, 205])
