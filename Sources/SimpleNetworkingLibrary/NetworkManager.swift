@@ -23,10 +23,10 @@ public class NetworkService: NetworkRequest {
         self.decoder = decoder
     }
     
-    public convenience init() {
+    public convenience init(sessionManager: SessionManager) {
         self.init(
             requestBuilder: RequestBuilder(),
-            sessionManager: RequestSession(),
+            sessionManager: sessionManager,
             decoder: ResponseObject()
         )
     }
